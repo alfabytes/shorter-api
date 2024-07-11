@@ -59,7 +59,7 @@ exports.getAllLinks = async (req, res) => {
     `;
     const res = await pool.query(query, [username]);
 
-    if (links.rows.length === 0) {
+    if (res.rows.length === 0) {
       return res.status(404).json({ error: 'No links found for user or user not found' });
     }
 
