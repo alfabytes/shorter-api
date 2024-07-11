@@ -57,13 +57,13 @@ exports.getAllLinks = async (req, res) => {
       JOIN users ON users.id = links.userId
       WHERE users.username = $1 LIMIT 50
     `;
-    const links = await pool.query(query, [username]);
+    const res = await pool.query(query, [username]);
 
     if (links.rows.length === 0) {
       return res.status(404).json({ error: 'No links found for user or user not found' });
     }
 
-    res.status(200).json({ links: links.rows });
+    res.status(200).json(res.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
