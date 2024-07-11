@@ -55,7 +55,7 @@ exports.getAllLinks = async (req, res) => {
       SELECT links.*
       FROM links
       JOIN users ON users.id = links.userId
-      WHERE users.username = $1
+      WHERE users.username = $1 LIMIT 50
     `;
     const links = await pool.query(query, [username]);
 
